@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b40c9c75ddef743dba8e438a84b4f78b, type: 3}
+  m_Name: TestItem
+  m_EditorClassIdentifier: 
+  itemID: 
+  itemName: 
+  description: 
+  size: {x: 1, y: 1}
+  isStackable: 0
+  maxStackSize: 1
+  type: 0
+  rarity: 0
+  icon: {fileID: 0}
+  worldModel: {fileID: 0}
+  condition: 100
+  weight: 1
+  requiresPower: 0
+  powerCost: 0
+  isDimensionalArtifact: 0
+  dimensionalStability: 10
+  isConsumable: 0
+  healAmount: 0
+  staminaAmount: 0
+  radiationReduction: 0
+  isEquippable: 0
+  equipmentSlot: 0
+  armorRating: 0
+  damage: 0
+  fireRate: 0
+  isCraftingMaterial: 0
+  materialType: 0
+  customProperties: []
