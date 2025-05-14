@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b40c9c75ddef743dba8e438a84b4f78b, type: 3}
+  m_Name: AssaultRifle
+  m_EditorClassIdentifier: 
+  itemID: weapon_rifle_ak
+  itemName: AK-47
+  description: Reliable assault rifle
+  size: {x: 2, y: 1}
+  isStackable: 0
+  maxStackSize: 1
+  type: 0
+  rarity: 1
+  icon: {fileID: 21300000, guid: 627e3af8a09474aed9925cb0b7e12bec, type: 3}
+  worldModel: {fileID: 0}
+  condition: 100
+  weight: 4.3
+  requiresPower: 0
+  powerCost: 0
+  isDimensionalArtifact: 0
+  dimensionalStability: 10
+  isConsumable: 0
+  healAmount: 0
+  staminaAmount: 0
+  radiationReduction: 0
+  isEquippable: 0
+  equipmentSlot: 0
+  armorRating: 0
+  damage: 30
+  fireRate: 600
+  isCraftingMaterial: 0
+  materialType: 0
+  customProperties: []

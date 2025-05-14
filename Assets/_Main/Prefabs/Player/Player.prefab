@@ -60,6 +60,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 128
+  inventoryManager: {fileID: 0}
+  inventoryUI: {fileID: 0}
+  isInventoryOpen: 0
   characterController: {fileID: 0}
   raycastSource: {fileID: 5683879430898514866}
   sprint:
