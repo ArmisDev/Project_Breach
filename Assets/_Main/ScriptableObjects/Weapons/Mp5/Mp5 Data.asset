@@ -27,9 +27,9 @@ MonoBehaviour:
   maxAmmo: 210
   reloadTime: 2
   canReloadPartially: 1
-  recoilVertical: 2
-  recoilHorizontal: 0.1
-  recoilRecoverySpeed: 5
+  recoilVertical: 3
+  recoilHorizontal: 2
+  recoilRecoverySpeed: 1
   maxRecoilAngle: 20
   fireSound: {fileID: 8300000, guid: 3fae688fa8a6c473cb823c46683415d0, type: 3}
   reloadStartSound: {fileID: 8300000, guid: 2990293c788e94369ab2dc6b177a0800, type: 3}

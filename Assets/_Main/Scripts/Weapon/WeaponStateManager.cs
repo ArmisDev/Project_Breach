@@ -60,7 +60,6 @@ public class WeaponStateManager : MonoBehaviour, IWeaponComponent
             weaponData.weaponType == WeaponType.FullAuto &&
             Time.time >= lastFireTime + weaponData.fireRate)
         {
-            // Debug.Log("Auto firing attempt"); // Add this for debugging
             TryFireWeapon();
         }
     }
