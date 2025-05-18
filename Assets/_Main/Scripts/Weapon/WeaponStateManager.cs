@@ -13,9 +13,6 @@ public class WeaponStateManager : MonoBehaviour, IWeaponComponent
     [SerializeField] private LayerMask hitLayers;
     [SerializeField] private float maxRange = 100f;
     
-    [Header("Debug")]
-    [SerializeField] private bool enableDebugLogs = false;
-    
     // Internal state
     private WeaponBase weapon;
     private WeaponDataSO weaponData;
@@ -23,13 +20,10 @@ public class WeaponStateManager : MonoBehaviour, IWeaponComponent
     private WeaponAmmoSystem ammoSystem;
     
     private bool canFire = true;
-    private float lastFireTime = -100f; // Initialize to a value that will allow immediate first shot
+    private float lastFireTime;
     private int burstCount = 0;
     private bool isFiring = false;
     private Coroutine firingCoroutine;
-    
-    // New flag for single-shot prevention
-    private bool hasProcessedFirstShot = false;
     
     public void Initialize(WeaponBase weaponBase)
     {
@@ -62,14 +56,10 @@ public class WeaponStateManager : MonoBehaviour, IWeaponComponent
     {
         // Handle fire rate timing for continuous fire modes
         if (isFiring && 
-            (weapon.CurrentState == WeaponState.Ready || weapon.CurrentState == WeaponState.Firing) &&
+            weapon.CurrentState == WeaponState.Ready || weapon.CurrentState == WeaponState.Firing &&
             weaponData.weaponType == WeaponType.FullAuto &&
             Time.time >= lastFireTime + weaponData.fireRate)
         {
-            // Process automatic firing
-            if (enableDebugLogs)
-                Debug.Log($"Auto-fire tick check - frame {Time.frameCount}, last shot {Time.time - lastFireTime:F3}s ago");
-                
             TryFireWeapon();
         }
     }
@@ -78,17 +68,14 @@ public class WeaponStateManager : MonoBehaviour, IWeaponComponent
     {
         canFire = true;
         isFiring = false;
-        hasProcessedFirstShot = false; 
-        lastFireTime = -100f; // Reset to allow immediate first shot
     }
     
     public void OnWeaponUnequipped()
     {
         StopAllFiringCoroutines();
         
-        // Reset all firing state when weapon is unequipped
+        // Reset firing state when weapon is unequipped
         isFiring = false;
-        hasProcessedFirstShot = false;
     }
     
     private void OnDestroy()
@@ -108,19 +95,8 @@ public class WeaponStateManager : MonoBehaviour, IWeaponComponent
     private bool TryFireWeapon()
     {
         // Verify we can fire
-        if (!canFire || 
-            (weapon.CurrentState != WeaponState.Ready && weapon.CurrentState != WeaponState.Firing))
+        if (!canFire || weapon.CurrentState != WeaponState.Ready && weapon.CurrentState != WeaponState.Firing)
         {
-            if (enableDebugLogs)
-                Debug.Log($"Cannot fire: canFire={canFire}, state={weapon.CurrentState}");
-            return false;
-        }
-        
-        // Check if enough time has passed since last shot (respect fire rate)
-        if (Time.time < lastFireTime + weaponData.fireRate)
-        {
-            if (enableDebugLogs)
-                Debug.Log($"Fire rate limit: {Time.time - lastFireTime:F3}s < {weaponData.fireRate:F3}s");
             return false;
         }
         
@@ -129,17 +105,11 @@ public class WeaponStateManager : MonoBehaviour, IWeaponComponent
         {
             events.RaiseWeaponFailedToFire(weapon);
             weapon.ChangeState(WeaponState.Empty);
-            
-            if (enableDebugLogs)
-                Debug.Log("Cannot fire: out of ammo");
             return false;
         }
         
         // Track fire time
         lastFireTime = Time.time;
-        
-        if (enableDebugLogs)
-            Debug.Log($"Firing weapon - frame {Time.frameCount}");
         
         // Perform fire
         FireWeapon();
@@ -264,8 +234,7 @@ public class WeaponStateManager : MonoBehaviour, IWeaponComponent
         // Store the input state
         isFiring = isPressed;
         
-        if (enableDebugLogs)
-            Debug.Log($"Fire input changed: {isPressed}, Weapon Type: {weaponData.weaponType}, Frame: {Time.frameCount}"); 
+        // Debug.Log($"Fire input changed: {isPressed}, Weapon Type: {weaponData.weaponType}"); // Add for debugging
         
         // Handle fire input based on weapon type
         switch (weaponData.weaponType)
@@ -286,16 +255,9 @@ public class WeaponStateManager : MonoBehaviour, IWeaponComponent
                 break;
                 
             case WeaponType.FullAuto:
-                // For full auto, handle both press and release
-                if (isPressed)
+                // For full auto, we want to try firing immediately on press
+                if (isPressed && Time.time >= lastFireTime + weaponData.fireRate)
                 {
-                    // Reset the first shot flag when button is pressed
-                    hasProcessedFirstShot = false;
-                    
-                    // Process first shot immediately
-                    if (enableDebugLogs)
-                        Debug.Log($"Processing initial auto shot - frame {Time.frameCount}");
-                    
                     TryFireWeapon();
                 }
                 // When released, ALWAYS transition back to ready state
@@ -303,9 +265,6 @@ public class WeaponStateManager : MonoBehaviour, IWeaponComponent
                 {
                     // Stop firing immediately when button is released
                     StopAllFiringCoroutines();
-                    
-                    if (enableDebugLogs)
-                        Debug.Log($"Auto-fire released - frame {Time.frameCount}");
                     
                     // Ensure we return to ready state 
                     if (weapon.CurrentState == WeaponState.Firing)
