@@ -92,11 +92,11 @@ public class WeaponAmmoSystem : MonoBehaviour, IWeaponComponent
             events.RaiseMagazineEmpty(weapon);
             
             // Auto reload if no ammo left
-            if (currentTotalAmmo > 0 && weapon.CurrentState != WeaponState.Reloading)
-            {
-                StartReload();
-            }
-            else if (currentTotalAmmo <= 0)
+            // if (currentTotalAmmo > 0 && weapon.CurrentState != WeaponState.Reloading)
+            // {
+            //     StartReload();
+            // }
+            if (currentTotalAmmo <= 0)
             {
                 events.RaiseAmmoEmpty(weapon);
             }
@@ -172,13 +172,14 @@ public class WeaponAmmoSystem : MonoBehaviour, IWeaponComponent
             events.RaiseAmmoChanged(weapon, currentMagazineAmmo);
         }
     }
-    
+
     #region Event Handlers
-    
+
     private void HandleWeaponFired(WeaponBase targetWeapon)
     {
         if (targetWeapon != weapon) return;
         ConsumeAmmo();
+        Debug.Log("Weapon Fire Reload");
     }
     
     private void HandleReloadStarted(WeaponBase targetWeapon)

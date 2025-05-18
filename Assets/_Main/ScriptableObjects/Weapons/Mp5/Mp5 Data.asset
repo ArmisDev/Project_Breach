@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2e5af69808974b7c970c52e6759e740, type: 3}
+  m_Name: Mp5 Data
+  m_EditorClassIdentifier: 
+  weaponName: Mp5
+  weaponDescription: A well built and reliable pistol
+  weaponPrefab: {fileID: 919132149155446097, guid: 3a577e7677b08324d8a41b9b8f2112d6, type: 3}
+  weaponViewModelPrefab: {fileID: 4844388925160370883, guid: 9cfbd508ee033472db6dcdb2a104026e, type: 3}
+  weaponType: 1
+  weaponCategory: 0
+  fireRate: 0.1
+  burstSize: 3
+  damage: 10
+  range: 100
+  magazineSize: 30
+  startingAmmo: 90
+  maxAmmo: 210
+  reloadTime: 2
+  canReloadPartially: 1
+  recoilVertical: 2
+  recoilHorizontal: 0.1
+  recoilRecoverySpeed: 5
+  maxRecoilAngle: 20
+  fireSound: {fileID: 8300000, guid: 3fae688fa8a6c473cb823c46683415d0, type: 3}
+  reloadStartSound: {fileID: 8300000, guid: 2990293c788e94369ab2dc6b177a0800, type: 3}
+  reloadEndSound: {fileID: 8300000, guid: 9f125d653845c4b31bdb05fba627a564, type: 3}
+  emptySound: {fileID: 0}
+  equipSound: {fileID: 8300000, guid: 30c5fa52eb1bf4e7587b382810baba98, type: 3}
+  muzzleFlashPrefab: {fileID: 0}
+  fireAnimationTrigger: Shoot
+  reloadAnimationTrigger: Reload
+  equipAnimationTrigger: Equip
