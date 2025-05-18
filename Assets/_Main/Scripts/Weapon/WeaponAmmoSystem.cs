@@ -179,7 +179,6 @@ public class WeaponAmmoSystem : MonoBehaviour, IWeaponComponent
     {
         if (targetWeapon != weapon) return;
         ConsumeAmmo();
-        Debug.Log("Weapon Fire Reload");
     }
     
     private void HandleReloadStarted(WeaponBase targetWeapon)
