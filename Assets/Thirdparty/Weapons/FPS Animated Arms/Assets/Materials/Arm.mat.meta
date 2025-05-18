@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: fd65b7cc3426418479638776335232b2
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 158107
+  packageName: FPS Animated Arms
+  packageVersion: 4.0
+  assetPath: Assets/FPS Animated Arms/Assets/Materials/Arm.mat
+  uploadId: 439913

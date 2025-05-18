@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 2db4599b7dd1af54db579b58845f3a12
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 296364
+  packageName: Stylized Guns (Animated)
+  packageVersion: 1.0
+  assetPath: Assets/NOT_Lonely/Stylized Guns/Scripts/WeaponBase.cs
+  uploadId: 693010

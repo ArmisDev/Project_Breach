@@ -476,6 +476,54 @@
             ]
         },
         {
+            "name": "Weapon",
+            "id": "19328c93-5b25-43d3-9f87-8000be29a817",
+            "actions": [
+                {
+                    "name": "Fire",
+                    "type": "Button",
+                    "id": "8bec5fd3-d93b-40fa-a2fc-65d5dc69748c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Reload",
+                    "type": "Button",
+                    "id": "318384f0-ab05-4600-a2fa-63dc2410536a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "b80fe449-ee47-430f-b238-da1c19babc17",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "Tap,Press",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "245162df-be7b-4ef5-b86a-55771d8af15c",
+                    "path": "<Keyboard>/r",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Reload",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
             "name": "UI",
             "id": "272f6d14-89ba-496f-b7ff-215263d3219f",
             "actions": [

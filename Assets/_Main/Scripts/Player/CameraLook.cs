@@ -50,6 +50,7 @@ namespace FPS.Player
             playerController = GetComponentInParent<PlayerController>();
             input = GetComponentInParent<PlayerInput>();
             look = input.actions["Look"];
+            MouseLock();
         }
 
         private void Start()
@@ -129,7 +130,6 @@ namespace FPS.Player
 
         void Update()
         {
-            MouseLock();
             HandleHeadbob();
 
             // Input Read

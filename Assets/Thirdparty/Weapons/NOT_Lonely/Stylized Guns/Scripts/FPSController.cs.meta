@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 3e3b6765d98eea145b113092275fb35c
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 296364
+  packageName: Stylized Guns (Animated)
+  packageVersion: 1.0
+  assetPath: Assets/NOT_Lonely/Stylized Guns/Scripts/FPSController.cs
+  uploadId: 693010
