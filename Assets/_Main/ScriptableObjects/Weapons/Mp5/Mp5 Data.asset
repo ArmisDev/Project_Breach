@@ -31,9 +31,9 @@ MonoBehaviour:
   recoilHorizontal: 2
   recoilRecoverySpeed: 1
   maxRecoilAngle: 20
-  fireSound: {fileID: 8300000, guid: 3fae688fa8a6c473cb823c46683415d0, type: 3}
-  reloadStartSound: {fileID: 8300000, guid: 2990293c788e94369ab2dc6b177a0800, type: 3}
-  reloadEndSound: {fileID: 8300000, guid: 9f125d653845c4b31bdb05fba627a564, type: 3}
+  fireSound: {fileID: 8300000, guid: af23f1f11982b4ef2bafa4fa609f1872, type: 3}
+  reloadStartSound: {fileID: 0}
+  reloadEndSound: {fileID: 0}
   emptySound: {fileID: 0}
   equipSound: {fileID: 8300000, guid: 30c5fa52eb1bf4e7587b382810baba98, type: 3}
   muzzleFlashPrefab: {fileID: 0}

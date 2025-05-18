@@ -18,17 +18,19 @@ public class WeaponAmmoSystem : MonoBehaviour, IWeaponComponent
     
     public int CurrentMagazineAmmo => currentMagazineAmmo;
     public int CurrentTotalAmmo => currentTotalAmmo;
+
+    [SerializeField] private HUDUI hudUI;
     
     public void Initialize(WeaponBase weaponBase)
     {
         weapon = weaponBase;
         weaponData = weapon.WeaponData;
         events = weapon.WeaponEvents;
-        
+
         // Initialize ammo
         currentMagazineAmmo = weaponData.magazineSize;
         currentTotalAmmo = weaponData.startingAmmo;
-        
+
         // Subscribe to events
         events.OnWeaponFired += HandleWeaponFired;
         events.OnReloadStarted += HandleReloadStarted;
@@ -67,7 +69,15 @@ public class WeaponAmmoSystem : MonoBehaviour, IWeaponComponent
             events.OnReloadInputPressed -= HandleReloadInput;
         }
     }
-    
+
+    void Update()
+    {
+        if (hudUI)
+        {
+            hudUI.UpdateAmmoText(currentMagazineAmmo, currentTotalAmmo);
+        }
+    }
+
     // Check if weapon can fire
     public bool CanFire()
     {

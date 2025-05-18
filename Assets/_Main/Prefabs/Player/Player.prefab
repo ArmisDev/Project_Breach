@@ -67,7 +67,7 @@ Camera:
     height: 1
   near clip plane: 0.01
   far clip plane: 1000
-  field of view: 60
+  field of view: 70
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -847,7 +847,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4844388925160370883, guid: 9cfbd508ee033472db6dcdb2a104026e, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4897677924256527102, guid: 9cfbd508ee033472db6dcdb2a104026e, type: 3}
       propertyPath: m_Layer
@@ -981,6 +981,18 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 8190924318642694327, guid: 9cfbd508ee033472db6dcdb2a104026e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -30.300705
+      objectReference: {fileID: 0}
+    - target: {fileID: 8190924318642694327, guid: 9cfbd508ee033472db6dcdb2a104026e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -21.215754
+      objectReference: {fileID: 0}
+    - target: {fileID: 8190924318642694327, guid: 9cfbd508ee033472db6dcdb2a104026e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -16.128534
+      objectReference: {fileID: 0}
     - target: {fileID: 8260023950167948308, guid: 9cfbd508ee033472db6dcdb2a104026e, type: 3}
       propertyPath: m_Layer
       value: 8
@@ -1026,6 +1038,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8682234589313711258, guid: 9cfbd508ee033472db6dcdb2a104026e, type: 3}
+      propertyPath: useCustomSettings
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8682234589313711258, guid: 9cfbd508ee033472db6dcdb2a104026e, type: 3}
       propertyPath: recoilRecoverySpeed
       value: 1
       objectReference: {fileID: 0}
@@ -1044,51 +1060,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4844388925160370883, guid: 9cfbd508ee033472db6dcdb2a104026e, type: 3}
-      insertIndex: 9
-      addedObject: {fileID: 3975312488129623791}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9cfbd508ee033472db6dcdb2a104026e, type: 3}
 --- !u!1 &644279859361229748 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 707094036554575090, guid: 9cfbd508ee033472db6dcdb2a104026e, type: 3}
   m_PrefabInstance: {fileID: 81323565047859014}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &4763208987595175301 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4844388925160370883, guid: 9cfbd508ee033472db6dcdb2a104026e, type: 3}
-  m_PrefabInstance: {fileID: 81323565047859014}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &3975312488129623791
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4763208987595175301}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Weapon
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
 --- !u!4 &5934439754299063202 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6015602775935188196, guid: 9cfbd508ee033472db6dcdb2a104026e, type: 3}
@@ -1222,6 +1200,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 3595295599886075984, guid: bd0450d4694b34b1fb06230fd6802153, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4195749095645455034, guid: bd0450d4694b34b1fb06230fd6802153, type: 3}
       propertyPath: m_Layer
       value: 8
@@ -1256,15 +1238,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4641358224251916080, guid: bd0450d4694b34b1fb06230fd6802153, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 22.561274
+      value: -20.633669
       objectReference: {fileID: 0}
     - target: {fileID: 4641358224251916080, guid: bd0450d4694b34b1fb06230fd6802153, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -32.24684
+      value: -20.306622
       objectReference: {fileID: 0}
     - target: {fileID: 4641358224251916080, guid: bd0450d4694b34b1fb06230fd6802153, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: -17.183634
+      value: -14.272369
       objectReference: {fileID: 0}
     - target: {fileID: 4690605546963927652, guid: bd0450d4694b34b1fb06230fd6802153, type: 3}
       propertyPath: m_Layer
@@ -1338,6 +1320,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 5279508446212190985, guid: bd0450d4694b34b1fb06230fd6802153, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5342573908174695273, guid: bd0450d4694b34b1fb06230fd6802153, type: 3}
       propertyPath: m_Layer
       value: 8
@@ -1400,15 +1386,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8210553480965583657, guid: bd0450d4694b34b1fb06230fd6802153, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 22.443552
+      value: -20.83356
       objectReference: {fileID: 0}
     - target: {fileID: 8210553480965583657, guid: bd0450d4694b34b1fb06230fd6802153, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -32.371387
+      value: -20.50074
       objectReference: {fileID: 0}
     - target: {fileID: 8210553480965583657, guid: bd0450d4694b34b1fb06230fd6802153, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: -17.379114
+      value: -14.535465
       objectReference: {fileID: 0}
     - target: {fileID: 8216314514737736041, guid: bd0450d4694b34b1fb06230fd6802153, type: 3}
       propertyPath: m_Layer
@@ -1446,7 +1432,8 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7943000707362015672, guid: bd0450d4694b34b1fb06230fd6802153, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -1509,6 +1496,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7d79f7c9089545c6b82acbb417b2c76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hudUI: {fileID: 0}
 --- !u!114 &6579974600432978463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1554,9 +1542,9 @@ MonoBehaviour:
   customEquipSound: {fileID: 0}
   clipInSound: {fileID: 8300000, guid: 2990293c788e94369ab2dc6b177a0800, type: 3}
   clipOutSound: {fileID: 8300000, guid: 9f125d653845c4b31bdb05fba627a564, type: 3}
-  slideBackSound: {fileID: 8300000, guid: d980168420fba42d6aa64388ce795f60, type: 3}
+  slideBackSound: {fileID: 0}
   slidePullSound: {fileID: 0}
-  slideReleaseSound: {fileID: 8300000, guid: e5da05fbecb19429f9f5974c927ee5dc, type: 3}
+  slideReleaseSound: {fileID: 0}
 --- !u!114 &8691134186564536064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1571,6 +1559,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireInputAction: {fileID: -5369085960433204339, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   reloadInputAction: {fileID: 1063074638343741684, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  enableDebugLogs: 0
 --- !u!114 &6780740465297363604
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1609,6 +1598,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   maxRange: 100
+  enableDebugLogs: 0
 --- !u!82 &3022344737205456670
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1621,7 +1611,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

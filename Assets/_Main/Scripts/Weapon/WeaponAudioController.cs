@@ -64,7 +64,7 @@ public class WeaponAudioController : MonoBehaviour, IWeaponComponent
     
     public void OnWeaponEquipped()
     {
-        PlayEquipSound();
+        // PlayEquipSound();
     }
     
     public void OnWeaponUnequipped()
