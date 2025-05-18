@@ -55,11 +55,12 @@ public class WeaponStateManager : MonoBehaviour, IWeaponComponent
     public void Tick()
     {
         // Handle fire rate timing for continuous fire modes
-        if (weapon.CurrentState == WeaponState.Firing && 
+        if (isFiring && 
+            weapon.CurrentState == WeaponState.Ready || weapon.CurrentState == WeaponState.Firing &&
             weaponData.weaponType == WeaponType.FullAuto &&
-            isFiring && 
             Time.time >= lastFireTime + weaponData.fireRate)
         {
+            // Debug.Log("Auto firing attempt"); // Add this for debugging
             TryFireWeapon();
         }
     }
@@ -73,6 +74,9 @@ public class WeaponStateManager : MonoBehaviour, IWeaponComponent
     public void OnWeaponUnequipped()
     {
         StopAllFiringCoroutines();
+        
+        // Reset firing state when weapon is unequipped
+        isFiring = false;
     }
     
     private void OnDestroy()
@@ -234,6 +238,8 @@ public class WeaponStateManager : MonoBehaviour, IWeaponComponent
         // Store the input state
         isFiring = isPressed;
         
+        // Debug.Log($"Fire input changed: {isPressed}, Weapon Type: {weaponData.weaponType}"); // Add for debugging
+        
         // Handle fire input based on weapon type
         switch (weaponData.weaponType)
         {
@@ -253,11 +259,22 @@ public class WeaponStateManager : MonoBehaviour, IWeaponComponent
                 break;
                 
             case WeaponType.FullAuto:
-                // Continuous firing handled in Tick()
-                if (!isPressed && weapon.CurrentState == WeaponState.Firing)
+                // For full auto, we want to try firing immediately on press
+                if (isPressed && Time.time >= lastFireTime + weaponData.fireRate)
                 {
-                    // Return to ready state when button released
-                    weapon.ChangeState(WeaponState.Ready);
+                    TryFireWeapon();
+                }
+                // When released, ALWAYS transition back to ready state
+                else if (!isPressed)
+                {
+                    // Stop firing immediately when button is released
+                    StopAllFiringCoroutines();
+                    
+                    // Ensure we return to ready state 
+                    if (weapon.CurrentState == WeaponState.Firing)
+                    {
+                        weapon.ChangeState(WeaponState.Ready);
+                    }
                 }
                 break;
                 

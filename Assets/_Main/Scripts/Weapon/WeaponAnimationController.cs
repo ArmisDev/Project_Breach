@@ -18,6 +18,12 @@ public class WeaponAnimationController : MonoBehaviour, IWeaponComponent
     
     [Header("Animation Options")]
     [SerializeField] private bool resetTriggerBeforeFiring = true;
+
+    [Header("Animation Smoothing")]
+    [SerializeField] private float velocitySmoothTime = 0.1f;
+    [SerializeField] private float minVelocityThreshold = 0.05f;
+    private float velocitySmoothing;
+
     
     // Internal state
     private WeaponBase weapon;
@@ -52,13 +58,25 @@ public class WeaponAnimationController : MonoBehaviour, IWeaponComponent
         events.OnWeaponEquipped += HandleWeaponEquipped;
         events.OnWeaponStateChanged += HandleWeaponStateChanged;
     }
-    
+
     public void Tick()
     {
         // Update animator parameters that change over time
         if (weaponAnimator != null && playerController != null)
         {
-            weaponAnimator.SetFloat(playerSpeedParam, playerController.playerVelocity.magnitude);
+            // Get the raw velocity magnitude
+            float rawVelocity = playerController.playerVelocity.magnitude;
+
+            // Apply smooth damping to the velocity value
+            float smoothVelocity = Mathf.SmoothDamp(
+                weaponAnimator.GetFloat(playerSpeedParam), // Current value
+                rawVelocity,                               // Target value
+                ref velocitySmoothing,                     // Reference value (for smoothing algorithm)
+                velocitySmoothTime                         // How quickly to reach the target
+            );
+
+            // Set the smoothed value
+            weaponAnimator.SetFloat(playerSpeedParam, smoothVelocity);
         }
     }
     
