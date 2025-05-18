@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using FPS.Player;
+using System;
 
 public class PauseManager : MonoBehaviour
 {
@@ -18,6 +19,16 @@ public class PauseManager : MonoBehaviour
     [SerializeField] private PlayerController playerController;
     [SerializeField] private CameraLook cameraLook;
     
+    // Static properties for global state access
+    public static bool IsGamePaused { get; private set; } = false;
+    
+    // Global events for input handling
+    public static event Action<bool> OnGamePauseStateChanged;
+    
+    // Input-specific event that input handlers can subscribe to
+    public static event Action OnInputDisabled;
+    public static event Action OnInputEnabled;
+    
     private bool isPaused = false;
     private PlayerInput playerInput;
     
@@ -25,10 +36,10 @@ public class PauseManager : MonoBehaviour
     {
         // Get references if not already set
         if (playerController == null)
-            playerController = FindObjectOfType<PlayerController>();
+            playerController = FindFirstObjectByType<PlayerController>();
             
         if (cameraLook == null)
-            cameraLook = FindObjectOfType<CameraLook>();
+            cameraLook = FindFirstObjectByType<CameraLook>();
             
         playerInput = playerController?.GetComponent<PlayerInput>();
         
@@ -59,6 +70,9 @@ public class PauseManager : MonoBehaviour
         // Ensure pause menu is hidden at start
         if (pauseMenuUI != null)
             pauseMenuUI.SetActive(false);
+            
+        // Initialize static state
+        IsGamePaused = false;
     }
     
     private void OnPauseActionPerformed(InputAction.CallbackContext context)
@@ -76,19 +90,18 @@ public class PauseManager : MonoBehaviour
 
     public void PauseGame()
     {
-        Debug.Log("PauseGame() called!");
-
-        // Set pause flag
+        // Set pause flags (local and static)
         isPaused = true;
+        IsGamePaused = true;
 
-        // Check if pauseMenuUI is assigned
-        Debug.Log("pauseMenuUI is " + (pauseMenuUI == null ? "NULL" : "assigned"));
+        // Broadcast first that input will be disabled
+        // This gives input handlers a chance to clean up before the pause
+        OnInputDisabled?.Invoke();
 
         // Show pause menu
         if (pauseMenuUI != null)
         {
             pauseMenuUI.SetActive(true);
-            Debug.Log("Pause menu activated");
         }
         else
         {
@@ -97,13 +110,11 @@ public class PauseManager : MonoBehaviour
 
         // Freeze time
         Time.timeScale = 0f;
-        Debug.Log("Time.timeScale set to 0");
 
         // Disable player input
         if (playerInput != null)
         {
             playerInput.DeactivateInput();
-            Debug.Log("Player input deactivated");
         }
         else
         {
@@ -113,13 +124,16 @@ public class PauseManager : MonoBehaviour
         // Show cursor for menu interaction
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        Debug.Log("Cursor unlocked and visible");
+        
+        // Broadcast game pause state changed event
+        OnGamePauseStateChanged?.Invoke(true);
     }
     
     public void ResumeGame()
     {
-        // Clear pause flag
+        // Clear pause flags
         isPaused = false;
+        IsGamePaused = false;
         
         // Hide pause menu
         if (pauseMenuUI != null)
@@ -135,6 +149,12 @@ public class PauseManager : MonoBehaviour
         // Restore cursor lock state (for FPS camera)
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        
+        // Broadcast that input is now enabled
+        OnInputEnabled?.Invoke();
+        
+        // Broadcast game pause state changed event
+        OnGamePauseStateChanged?.Invoke(false);
     }
     
     public void ExitGame()
@@ -150,11 +170,9 @@ public class PauseManager : MonoBehaviour
         #endif
     }
     
-    // Update check for escape key as a fallback method
-    // private void Update()
-    // {
-    //     // This is a backup in case the Input System action isn't set up
-    //     if (Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
-    //         TogglePause();
-    // }
+    // Public method to check pause state
+    public bool IsPaused()
+    {
+        return isPaused;
+    }
 }

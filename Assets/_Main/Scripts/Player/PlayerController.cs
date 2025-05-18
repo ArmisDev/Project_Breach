@@ -39,6 +39,9 @@ namespace FPS.Player
         private InputAction move;
         [HideInInspector] public InputAction sprint;
         private InputAction jump;
+        
+        // Pause state tracking
+        private bool isInputPaused = false;
 
         private void Awake()
         {
@@ -48,9 +51,32 @@ namespace FPS.Player
             sprint = input.actions["Sprint"];
             jump = input.actions["Jump"];
         }
+        
+        private void OnEnable()
+        {
+            // Subscribe to global pause events
+            PauseManager.OnGamePauseStateChanged += HandlePauseStateChanged;
+        }
+        
+        private void OnDisable()
+        {
+            // Unsubscribe from global pause events
+            PauseManager.OnGamePauseStateChanged -= HandlePauseStateChanged;
+        }
+        
+        private void HandlePauseStateChanged(bool isPaused)
+        {
+            isInputPaused = isPaused;
+            
+            // The PlayerInput component will be deactivated by the PauseManager,
+            // but this provides an extra layer of protection in our logic
+        }
 
         void MovementLogic()
         {
+            // Skip movement logic if paused - extra layer of protection
+            if (isInputPaused || PauseManager.IsGamePaused) return;
+            
             // Get movement input
             Vector2 initMove = move.ReadValue<Vector2>();
 
@@ -81,7 +107,7 @@ namespace FPS.Player
             jumpVelocity += gravity * Time.deltaTime;
 
             // Handle jumping
-            if (jump.WasPerformedThisFrame() && IsGrounded())
+            if (!isInputPaused && jump.WasPerformedThisFrame() && IsGrounded())
             {
                 Jump();
             }
@@ -89,8 +115,6 @@ namespace FPS.Player
             // Combine horizontal and vertical velocities
             playerVelocity = horizontalVelocity;
             playerVelocity.y = jumpVelocity;
-            //Vector3 velocity = horizontalVelocity;
-            //velocity.y = jumpVelocity;
 
             // Move the character
             characterController.Move(playerVelocity * Time.deltaTime);
@@ -98,6 +122,9 @@ namespace FPS.Player
 
         void Jump()
         {
+            // Don't jump if paused
+            if (isInputPaused || PauseManager.IsGamePaused) return;
+            
             // Calculate initial jump velocity based on desired jump height
             jumpVelocity = Mathf.Sqrt(2f * -gravity * jumpForce);
 
@@ -156,6 +183,22 @@ namespace FPS.Player
 
         void Update()
         {
+            // Skip all input processing if paused
+            if (isInputPaused || PauseManager.IsGamePaused)
+            {
+                // We still want gravity to apply during pause if timeScale isn't zero
+                if (Time.timeScale > 0 && !IsGrounded())
+                {
+                    // Just apply gravity
+                    jumpVelocity += gravity * Time.deltaTime;
+                    Vector3 gravityVelocity = Vector3.zero;
+                    gravityVelocity.y = jumpVelocity;
+                    characterController.Move(gravityVelocity * Time.deltaTime);
+                }
+                
+                return;
+            }
+        
             MovementLogic();
 
             if (IsGrounded())
@@ -164,7 +207,7 @@ namespace FPS.Player
             }
 
             // Modify jump condition
-            if (jump.WasPerformedThisFrame() &&
+            if (!isInputPaused && jump.WasPerformedThisFrame() &&
                 (IsGrounded() || Time.time - lastGroundedTime < coyoteTime))
             {
                 Jump();
@@ -174,7 +217,6 @@ namespace FPS.Player
             {
                 fallTime += Time.deltaTime;
             }
-
             else
             {
                 fallTime = 0;
